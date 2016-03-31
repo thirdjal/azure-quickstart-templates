@@ -49,7 +49,7 @@
     "publicIPAddressType": "Dynamic",
     "vmStorageAccountContainerName": "vhds",
     "vmName": "MyUbuntuVM",
-    "vmSize": "Standard_D2",
+    "vmSize": "Standard_D1",
     "virtualNetworkName": "MyVNET",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
@@ -184,5 +184,15 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+     "hostname": {
+         "type": "string",
+         "value": "[concat(parameters('dnsLabelPrefix'), '.', variables('location'), '.cloudapp.azure.com')]"
+     },
+     "sshCommand": {
+         "type": "string",
+         "value": "[concat('ssh ', parameters('adminUsername'), '@', parameters('dnsLabelPrefix'), '.', variables('location'), '.cloudapp.azure.com')]"
+     } 
+  }
 }
